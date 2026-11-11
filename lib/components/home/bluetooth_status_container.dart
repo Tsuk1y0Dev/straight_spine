@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class BluetoothStatusContainer extends StatelessWidget {
-  final BoxDecoration regularContDecoration;
 
   const BluetoothStatusContainer({
     super.key,
-    required this.regularContDecoration,
   });
 
   @override

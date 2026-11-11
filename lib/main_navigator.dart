@@ -20,6 +20,7 @@ class _AppNavigatorState extends State<AppNavigator> {
     return Scaffold(
       body: IndexedStack(index: currentPageIndex, children: _screens),
       bottomNavigationBar: NavigationBar(
+	  height: 84,
         labelTextStyle: WidgetStateProperty.resolveWith((
           Set<WidgetState> states,
         ) {

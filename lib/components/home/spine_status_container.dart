@@ -52,7 +52,7 @@ class SpineStatusContainer extends StatelessWidget {
 
             children: [
               Text(
-                "3.2deg",
+                "3.2\u00B0C",
                 style: TextStyle(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.w600,
