@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SpineStatusContainer extends StatelessWidget {
-  const SpineStatusContainer({super.key});
+  final double angle;
+  final bool isConnected;
+
+  const SpineStatusContainer({
+    super.key,
+    required this.angle,
+    required this.isConnected,
+  });
+
+  String getFormattedAngle() {
+    return '${angle.toStringAsFixed(1)}\u00B0';
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Container(
+
       padding: EdgeInsetsGeometry.all(18),
       width: 354,
       height: 410,
@@ -16,7 +29,7 @@ class SpineStatusContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
 
-      child: Column(
+      child: isConnected ? Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 10,
 
@@ -52,7 +65,7 @@ class SpineStatusContainer extends StatelessWidget {
 
             children: [
               Text(
-                "3.2\u00B0C",
+                getFormattedAngle(),
                 style: TextStyle(
                   color: theme.colorScheme.primary,
                   fontWeight: FontWeight.w600,
@@ -85,6 +98,7 @@ class SpineStatusContainer extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+
             icon: Icon(
               Icons.sync,
               color: theme.colorScheme.surface,
@@ -93,7 +107,10 @@ class SpineStatusContainer extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ) 
+	  : Center(
+	  	child: Text("Устройство не подключено"),
+	)
     );
   }
 }

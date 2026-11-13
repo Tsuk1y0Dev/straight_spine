@@ -7,8 +7,25 @@ import 'package:straight_spine/components/home/straight_spine_progress_container
 
 void main() => runApp(HomeScreen());
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  double currentSpineAngle = 3.2;
+  bool isConnected = true;
+  double holdSpineProgress = 0.74;
+  double holdSpineTarget = 0.8;
+
+  void toggleConnection() {
+    setState(() {
+      isConnected = !isConnected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,18 +100,26 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
 
                   children: [
-                    BluetoothStatusContainer(),
-                    SpineStatusContainer(),
-                    StraightSpineProgressContainer(),
-
-                    Container(
-                      width: 354,
-                      height: 154,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceContainer,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                    BluetoothStatusContainer(
+                      firstSensorBatteryLevel: 92.375,
+                      secondSensorBatteryLevel: 86.1010,
+                      isConnected: isConnected,
+                      onTap: toggleConnection,
                     ),
+                    SpineStatusContainer(
+                      isConnected: isConnected,
+                      angle: currentSpineAngle,
+                    ),
+                    StraightSpineProgressContainer(holdSpineProgress: holdSpineProgress, holdSpineTarget: holdSpineTarget),
+
+                    // Container(
+                    //   width: 354,
+                    //   height: 154,
+                    //   decoration: BoxDecoration(
+                    //     color: Theme.of(context).colorScheme.surfaceContainer,
+                    //     borderRadius: BorderRadius.circular(16),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
