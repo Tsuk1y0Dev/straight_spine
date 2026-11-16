@@ -19,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isConnected = false;
   double holdSpineProgress = 0.74;
   double holdSpineTarget = 0.8;
-
+  String? selectedDevice;
+  // TODO: make toggleConnection function logic better
   void toggleConnection() {
     setState(() {
       isConnected = !isConnected;
@@ -110,7 +111,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       isConnected: isConnected,
                       angle: currentSpineAngle,
                     ),
-                    StraightSpineProgressContainer(holdSpineProgress: holdSpineProgress, holdSpineTarget: holdSpineTarget),
+                    StraightSpineProgressContainer(
+                      holdSpineProgress: holdSpineProgress,
+                      holdSpineTarget: holdSpineTarget,
+                    ),
 
                     // Container(
                     //   width: 354,
