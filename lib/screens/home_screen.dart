@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double currentSpineAngle = 3.2;
-  bool isConnected = true;
+  bool isConnected = false;
   double holdSpineProgress = 0.74;
   double holdSpineTarget = 0.8;
 
