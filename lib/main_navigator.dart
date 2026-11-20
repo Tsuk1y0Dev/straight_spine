@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:straight_spine/services/bluetooth_service.dart';
+import 'package:straight_spine/services/permissions_service.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/insights_screen.dart';
@@ -12,8 +15,25 @@ class AppNavigator extends StatefulWidget {
 
 class _AppNavigatorState extends State<AppNavigator> {
   int currentPageIndex = 0;
+  late final BluetoothService _btService;
 
-  final List<Widget> _screens = [const HomeScreen(), const InsightsScreen()];
+  @override
+  void initState() {
+    super.initState();
+    _btService = BluetoothService(PermissionsService());
+    _btService.init();
+  }
+
+  @override
+  void dispose() {
+    _btService.dispose();
+    super.dispose();
+  }
+
+  late final List<Widget> _screens = [
+    HomeScreen(btService: _btService),
+    InsightsScreen(btService: _btService),
+  ];
 
   @override
   Widget build(BuildContext context) {

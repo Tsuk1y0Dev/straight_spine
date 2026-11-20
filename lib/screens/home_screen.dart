@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:straight_spine/components/home/bluetooth_status_container.dart';
 import 'package:straight_spine/components/home/spine_status_container.dart';
 import 'package:straight_spine/components/home/straight_spine_progress_container.dart';
+import 'package:straight_spine/services/bluetooth_service.dart';
 import 'package:straight_spine/theme/app_palettes.dart';
 import 'package:straight_spine/theme/theme_controller.dart';
 
-void main() => runApp(HomeScreen());
-
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final BluetoothService btService;
+  const HomeScreen({super.key, required this.btService});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -123,11 +123,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
 
                       children: [
-                        BluetoothStatusContainer(
-                          firstSensorBatteryLevel: 92.375,
-                          secondSensorBatteryLevel: 86.1010,
-                          isConnected: isConnected,
-                          onTap: connect,
+                        ListenableBuilder(
+                          listenable: widget.btService,
+                          builder: (context, child) {
+                            return BluetoothStatusContainer(
+                              firstSensorBatteryLevel: 92.375,
+                              secondSensorBatteryLevel: 86.1010,
+                              isConnected: widget.btService.isConnected,
+                              isConnecting: widget.btService.isConnecting,
+                              devices: widget.btService.devices,
+                              onDeviceSelected: (device) =>
+                                  widget.btService.connect(device),
+                              onDisconnect: widget.btService.disconnect,
+                            );
+                          },
                         ),
                         SpineStatusContainer(
                           isConnected: isConnected,

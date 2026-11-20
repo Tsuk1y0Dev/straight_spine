@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
-void main () => runApp(InsightsScreen());
+import 'package:straight_spine/services/bluetooth_service.dart';
 
 
 class InsightsScreen extends StatelessWidget {
-	const InsightsScreen({super.key});
+	final BluetoothService btService;
+	const InsightsScreen({
+		super.key,
+		required this.btService
+	});
 
 	@override
 	  Widget build(BuildContext context) {
