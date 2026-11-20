@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class StraightSpineProgressContainer extends StatelessWidget {
-	final double holdSpineProgress;
-	final double holdSpineTarget;
+  final double holdSpineProgress;
+  final double holdSpineTarget;
   const StraightSpineProgressContainer({
-  	super.key,
-	required this.holdSpineProgress,
-	required this.holdSpineTarget
+    super.key,
+    required this.holdSpineProgress,
+    required this.holdSpineTarget,
   });
 
   @override
@@ -93,7 +93,7 @@ class StraightSpineProgressContainer extends StatelessWidget {
               ],
             ),
             Align(
-			alignment: Alignment.centerLeft,
+              alignment: Alignment.centerLeft,
               child: Text(
                 'До цели 6%',
                 style: TextStyle(

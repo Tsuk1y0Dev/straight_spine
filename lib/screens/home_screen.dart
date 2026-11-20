@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:straight_spine/components/home/bluetooth_status_container.dart';
 import 'package:straight_spine/components/home/spine_status_container.dart';
 import 'package:straight_spine/components/home/straight_spine_progress_container.dart';
+import 'package:straight_spine/theme/app_palettes.dart';
 import 'package:straight_spine/theme/theme_controller.dart';
 
 void main() => runApp(HomeScreen());
@@ -21,6 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   double holdSpineProgress = 0.74;
   double holdSpineTarget = 0.8;
   String? selectedDevice;
+  int status = 0;
+  int count = 0;
+  final ThemeController _themeController = ThemeController();
 
   void connect() {
     setState(() {
@@ -30,24 +34,36 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void changeTheme(int themeCode) {
+    switch (themeCode) {
+      case 0:
+        setState(() {
+          _themeController.setPalette(AppPalettes.normal);
+        });
+      case 1:
+        _themeController.setPalette(AppPalettes.warning);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: ThemeController(),
+      listenable: _themeController,
       builder: (context, child) {
+        final palette = _themeController.currentPalette;
         return MaterialApp(
           darkTheme: ThemeData(
             useMaterial3: true,
-            brightness: Brightness.dark,
+            brightness: palette.brightness,
             colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF49D9A1),
-              primary: const Color(0xFF49D9A1),
+              seedColor: palette.seedColor,
+              primary: palette.primary,
               brightness: Brightness.dark,
-              surface: const Color(0xFF101C23),
-              surfaceContainer: const Color(0xFF1A2A32),
-              onSurface: Colors.white,
-              onSurfaceVariant: const Color(0xFF9BAFB8),
-              onInverseSurface: const Color(0xFF173D34),
+              surface: palette.surface,
+              surfaceContainer: palette.surfaceContainer,
+              onSurface: palette.onSurface,
+              onSurfaceVariant: palette.onSurfaceVariant,
+              onInverseSurface: palette.onInverseSurface,
             ),
           ),
 
@@ -120,6 +136,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         StraightSpineProgressContainer(
                           holdSpineProgress: holdSpineProgress,
                           holdSpineTarget: holdSpineTarget,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            changeTheme(count % 2);
+                            count++;
+                          },
+                          child: Text("Change theme"),
                         ),
 
                         // Container(

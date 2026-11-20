@@ -39,8 +39,8 @@ class AppPalettes {
 
   static const warning = AppPalette(
     name: "Warning",
-    seedColor: Color(0xFF49D9A1),
-    primary: Color(0xFF49D9A1),
+    seedColor: Color(0xFFDEB845),
+    primary: Color(0xFFDEB845),
     surface: Color(0xFF101C23),
     surfaceContainer: Color(0xFF1A2A32),
     onSurface: Colors.white,
@@ -49,7 +49,7 @@ class AppPalettes {
     brightness: Brightness.dark,
   );
   static const critic = AppPalette(
-    name: "critic",
+    name: "Critic",
     seedColor: Color(0xFF49D9A1),
     primary: Color(0xFF49D9A1),
     surface: Color(0xFF101C23),
