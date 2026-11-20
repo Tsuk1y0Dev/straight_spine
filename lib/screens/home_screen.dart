@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             changeTheme(count % 2);
                             count++;
                           },
-                          child: Text("Change theme"),
+                          child: const Text("Change theme"),
                         ),
 
                         // Container(
